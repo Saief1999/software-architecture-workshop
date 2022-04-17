@@ -1,0 +1,54 @@
+<div class="cover-image-container page-header page-header-small">
+    <div class="filter"></div>
+
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-5 col-sm-6 ">
+        <div class="cinema-image pl-5">
+            <!-- 
+            <img src="http://localhost:3000/uploads/cinemas/02f27135-49af-4bb6-b1fb-0138cefdc938-daniel-olahs.jpg">
+            -->
+            <img [src]="cinema.imageUrl" alt="cinema-image">
+        </div>
+    </div>
+    <div class="cinemaInfo col-md-7 col-sm-6 ">
+        <div>
+            <h2>
+                {{cinema.name}}
+            </h2>
+            <div>
+                {{cinema.description}}
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <br>
+            <div class="row">
+                <div class="title1 col-md-5 col-sm-6">
+                    <p>adresse :</p>
+                    <p>phone number :</p>
+                    <p>openingTime: </p>
+                    <p>closingTime : </p>
+                </div>
+                <div class=" col-md-7 col-sm-6">
+                    <p>{{cinema.address}}</p>
+                    <p>{{cinema.phone}}</p>
+                    <p>{{cinema.openingTime}}</p>
+                    <p>{{cinema.closingTime}}</p>
+                </div>
+
+            </div>
+        
+
+        </div>
+    
+    </div>
+
+</div>
+
+<div class="row m-5">
+    <div class="col">
+        <app-calendar [id]="id" [byCinema]="true"></app-calendar>
+    </div>
+</div>

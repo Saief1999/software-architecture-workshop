@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-md-6 col-sm-6 card no-transition p-4 mx-auto">
+        <div class="px-2 signup-card">
+            <div *ngIf="errorMessage !== ''" class="alert alert-danger my-2 text-center">
+                <div class="container">
+                    <i class="nc-bell-55 nc-icon"></i>
+                    {{ errorMessage }}
+                    <button type="button" class="close" (click)="removeMessage()">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-title centered-text">
+                <h3>Sign up</h3>
+                <small class="text-muted">Create a new account</small>
+            </div>
+            <form class="form-group py-2" #registrationForm="ngForm">
+
+
+                <!-- <div class="my-1">
+                    <label class="form-label" for="">First name</label>
+                    <input class="form-control" #firstNameInput="ngModel" ngModel type="text" required minlength="3"
+                        name="firstname" pattern="[A-Za-z]+" placeholder="Your first name">
+                    <app-error-message [text]="'Insert a valid first name'"
+                        [condition]="firstNameInput.invalid && firstNameInput.touched"></app-error-message>
+                </div>
+                <div class="my-1">
+                    <label class="form-label" for="">Last name</label>
+                    <input class="form-control" ngModel type="text" required minlength="5" name="lastname"
+                        #lastNameInput="ngModel" placeholder="your last name" pattern="[A-Za-z]+">
+                    <app-error-message [text]="'Insert a valid last name'"
+                        [condition]="lastNameInput.invalid && lastNameInput.touched">
+                    </app-error-message>
+                </div> -->
+
+                <div class="my-1 row">
+                    <div class="col-6">
+                        <label class="form-label" for="">First name</label>
+                        <input class="form-control" #firstNameInput="ngModel" ngModel type="text" required minlength="3"
+                            name="firstname" pattern="[A-Za-z]+" placeholder="Your first name">
+                        <app-error-message [text]="'Insert a valid first name'"
+                            [condition]="firstNameInput.invalid && firstNameInput.touched">
+                        </app-error-message>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="">Last name</label>
+                        <input class="form-control" ngModel type="text" required minlength="5" name="lastname"
+                            #lastNameInput="ngModel" placeholder="your last name" pattern="[A-Za-z]+">
+                        <app-error-message [text]="'Insert a valid last name'"
+                            [condition]="lastNameInput.invalid && lastNameInput.touched">
+                        </app-error-message>
+                    </div> 
+                </div>
+
+                <div class="my-1">
+                    <label class="form-label" for="">Email</label>
+                    <input class="form-control" ngModel type="email" required email name="email" #emailInput="ngModel"
+                        placeholder="your email">
+                    <app-error-message [text]="'Insert a valid email'" [condition]="emailInput.invalid && emailInput.touched">
+                    </app-error-message>
+                </div>
+
+                <div class="my-1">
+                    <label class="form-label" for="">Username</label>
+                    <input class="form-control" #userNameInput="ngModel" ngModel type="text" required minlength="3"
+                        name="username" pattern="[A-Za-z0-9-\.]+" placeholder="Your user name">
+                    <app-error-message [text]="'Insert a valid user name'"
+                        [condition]="userNameInput.invalid && userNameInput.touched"></app-error-message>
+                </div>
+                <div class="my-1 row">
+                    <div class="col-6">
+                        <label class="form-label" for="">Password</label>
+                        <input class="form-control" ngModel type="password" required minlength="5" name="password"
+                            #passwordInput="ngModel" placeholder="your password">
+                        <app-error-message [text]="'A password is at least 5 characters'"
+                            [condition]="passwordInput.invalid && passwordInput.touched">
+                        </app-error-message>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" for="">Repeat your password</label>
+                        <input class="form-control" ngModel type="password" name="repeatedPassword" #repeatedPasswordInput="ngModel"
+                            required [pattern]="passwordInput.value" placeholder="repeat your password">
+                        <app-error-message [text]="'please repeat the same password'"
+                            [condition]="repeatedPasswordInput.invalid && repeatedPasswordInput.touched && repeatedPasswordInput.value !== passwordInput.value">
+                        </app-error-message>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="checkbox-circle mr-2" [checked]="checked" (click)="setChecked()">
+                    <label>Are you sure you want to submit this data</label>
+                </div>
+                <button [disabled]="registrationForm.invalid || !checked" type="submit" class="btn btn-danger btn-block btn-round mt-3"
+                    (click)="register(registrationForm)">Signup
+                </button>
+            </form>
+            <div class="d-block centered-text">
+                <p>
+                    You have an account already?
+                    <a [routerLink]="[ '/register/login' ]">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

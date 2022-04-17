@@ -1,0 +1,33 @@
+.cover-image-container{
+  background-image: url("assets/img/cinema.jpg");
+  background-position: center center;
+  position: relative;
+  width: 100%;
+
+}
+
+
+.cinema-image > img{
+    border-radius: 10px;
+    padding-left: 20px;
+    width: 500px;
+    height: 300px;
+}
+
+.cinema-info > h2{
+    -webkit-font-smoothing: antialiased;
+    font-family: Montserrat,Helvetica,Arial,sans-serif;
+    font-weight: 300;
+    margin: 30px 0 0;
+    font-size: 3em;
+}
+
+p{
+  line-height :2em;
+  font-size: 1.5em;
+
+}
+
+.title1 > p{
+  font-weight: bold;
+}

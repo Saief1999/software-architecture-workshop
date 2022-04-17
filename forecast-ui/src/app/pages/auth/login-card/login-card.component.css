@@ -1,0 +1,18 @@
+input.ng-invalid.ng-touched{
+    border : red solid 1px;
+}
+
+/* .signin-card{
+    height : 70vh;
+} */
+
+.custom-alert-danger{
+    background-color: pink;
+    color : red;
+    font-weight : bold;
+    text-align : center;
+}
+
+.centered-text {
+    text-align: center;
+}

@@ -1,0 +1,39 @@
+* *::after *::before{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.cover-image-container{
+    background-image: url("assets/img/profile-cover.jpg");
+    background-position: center center;
+    position: relative;
+    z-index: 3;
+}
+.special-row{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-picture{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 1px #ccc;
+    align-self: center;
+    margin-top: -100px;
+    position: relative;
+    z-index: 3;
+}
+
+.btn{
+    margin-top: 5px;
+}
+
+.username{
+    margin-top: -2px;
+    font-weight: 900;
+    font-family: 'Comic Sans MS';
+    color: black;
+}

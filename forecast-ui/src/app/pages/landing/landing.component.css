@@ -1,0 +1,11 @@
+select.ng-invalid.ng-touched{
+    border: red 1px solid;
+}
+
+textarea.ng-invalid.ng-touched{
+    border: red 1px solid;
+}
+
+.custom-icon{
+    display: inline;
+}

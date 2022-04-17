@@ -1,0 +1,90 @@
+<h2 class="text-center">General Information</h2>
+<div *ngIf="errorMessage !== ''" class="alert alert-danger my-2 text-center">
+    <div class="container">
+        <i class="nc-bell-55 nc-icon"></i>
+        {{ errorMessage }}
+        <button type="button" class="close" (click)="removeMessage()">
+            <i class="nc-icon nc-simple-remove"></i>
+        </button>
+    </div>
+</div>
+<div *ngIf="successMessage !== ''" class="alert alert-success my-2 text-center">
+    <div class="container">
+        <i class="nc-bell-55 nc-icon"></i>
+        {{ successMessage }}
+        <button type="button" class="close" (click)="removeMessage()">
+            <i class="nc-icon nc-simple-remove"></i>
+        </button>
+    </div>
+</div>
+<form [formGroup]="generalInformationForm" class="mt-3" (ngSubmit)="submitGeneralChanges()">
+    <div class="form-group w-100">
+        <label for="username">Username: </label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="nc-icon nc-badge"></i></span>
+            </div>
+            <input id="username" type="text" class="form-control" formControlName='username'>
+        </div>
+        <div *ngIf="!getUsernameInput().valid && getUsernameInput().touched">
+            <span style="color: red;">Invalid username</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group w-40 col">
+            <label for="firstname">First name: </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="nc-icon nc-single-02"></i></span>
+                </div>
+                <input id="firstname" type="text" class="form-control" formControlName='firstname'>
+            </div>
+            <div *ngIf="!getFirstnameInput().valid && getFirstnameInput().touched">
+                <span style="color: red;">Invalid firstname</span>
+            </div>
+        </div>
+        <div class="form-group w-40 col">
+            <label for="lastname">Last name: </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="nc-icon nc-single-02"></i></span>
+                </div>
+                <input id="lastname" type="text" class="form-control" formControlName='lastname'>
+            </div>
+            <div *ngIf="!getLastnameInput().valid && getLastnameInput().touched">
+                <span style="color: red;">Invalid lastname</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <label for="gender">Gender :</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="nc-icon nc-circle-10"></i></span>
+            </div>
+            <select id="gender" class="form-control" formControlName="gender">
+                <option *ngFor="let gender of genders" [ngValue]="gender">{{ gender }}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <label for="birthday">Birthday:</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="nc-icon nc-calendar-60"></i></span>
+            </div>
+            <input type="date" class="form-control" formControlName="birthday" id="birthday">
+        </div>
+    </div>
+    <div class="form-group w-100">
+        <label for="quote">Add you favorite Quote: </label>
+        <textarea id="quote" class="form-control" rows="3" formControlName="quote"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" class="mr-2" [checked]="generalInformationconfirmationStatus"
+            (click)="clickConfirmation()" id="confirmation">
+        <label for="confirmation">Are you sure you want to submit these changes</label>
+    </div>
+    <button type="submit" [disabled]="generalInformationDisabled" class="btn btn-success btn-round btn-lg">Submit
+        Changes</button>
+</form>

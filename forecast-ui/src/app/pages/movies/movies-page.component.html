@@ -1,0 +1,39 @@
+<div class="wrapper"
+>
+    <div class="main">
+        <div class="section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col">
+                        <h1> Movies </h1>
+                    </div> 
+                </div>
+                <div class="row ">
+                    <div class="col-10">
+                        <span class="d-flex input-group input-group-lg no-border align-items-center">
+                            <span class id="basic-addon1"><i class="fa fa-search fa-lg"></i></span>
+                            <input type="text" class="form-control  input-xtreme no-border" placeholder="Find Movies" aria-describedby="basic-addon1" #search (keyup)="atSearch($event)">
+                        </span>
+                    </div>
+                    <span class="col-2">
+                        <angular2-multiselect 
+                        [data]="orderOptions" 
+                        [(ngModel)]="order" 
+                        [settings]="orderSettings"
+                        (onSelect)="changeOrder($event)"
+                        ></angular2-multiselect>
+                    </span>
+                </div>
+                <div class="row movies-container"
+                infinite-scroll
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="150"
+                [infiniteScrollDisabled]="infiniteScrollDisabled()"
+                (scrolled)="onScroll()"
+                >
+                    <app-movie-element class="col-md-3 col-sm-6 col-xs-12" *ngFor="let movie of movies" [movie]="movie"></app-movie-element>
+                </div>
+                </div>
+            </div>
+    </div>
+</div>

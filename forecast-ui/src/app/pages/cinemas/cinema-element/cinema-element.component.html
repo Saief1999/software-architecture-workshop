@@ -1,0 +1,42 @@
+<div class="card card-plain">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card-image">
+                <!-- <img src="assets/img/uriel-soberanes.jpg" alt="cinema"> -->
+                <a [routerLink]="['/cinemas/'+cinema._id]">
+                    <img  [src]="cinema.imageUrl" alt="cinema">
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div  class="card-body">
+                <div *ngIf="cinema.isOpen; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <h6 class="card-category text-info">Open</h6>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <h6 class="card-category text-danger">Closed</h6>
+                    </ng-template>
+
+                <h2 class="card-title">
+                    <a [routerLink]="['/cinemas/'+cinema._id]">
+                        {{ cinema.name }}
+                    </a>
+                </h2>
+                <!-- <p  class="card-description"> 
+                    Sharing processing, display and sensors across smartphones and tethered smartglasses gives you two batteries, each powering fewer individual systems. If they’re connected by a cable, this could give a healthy bump to battery life — and… 
+                    <a  href="#"> Read More </a>
+                </p> -->
+
+                <p  class="card-description"> 
+                    {{ cinema.description }}
+                    <!-- <a  [routerLink]="['/cinemas/'+cinema.id]"> Read More </a> -->
+                </p>
+                <div class="mt-2" *ngIf="isAdmin()">
+                    <button class="btn btn-warning btn-round" (click)="updateCinema(cinema._id)">Update</button>
+                    <button class="ml-2 btn btn-danger btn-round" (click)="removeCinema(cinema._id)">Remove</button>
+                </div>
+        </div>
+    </div>
+</div>

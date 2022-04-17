@@ -1,0 +1,23 @@
+.bg-image {
+    background-image : url("assets/img/login/login-background.jpg");
+}
+
+
+.container {
+    /* margin-top: 5%; */
+    position: relative;
+    z-index: 3;
+}
+
+.bg-image .title {
+    /* margin:15% auto 30px; */
+    font-size:15em;
+    color:#fff;
+    z-index:2;
+    text-align:center
+}
+
+.bg-image .error-msg {
+    font-size:20px;
+    text-align:center
+}

@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-md-4 col-sm-6 card no-transition p-4 mx-auto">
+        <div class="px-2 align-items-center">
+            <div *ngIf="errorMessage !== ''" class="alert alert-danger my-2 text-center">
+                <div class="container">
+                    <i class="nc-bell-55 nc-icon"></i>
+                    {{ errorMessage }}
+                    <button type="button" class="close" (click)="removeMessage()">
+                        <i class="nc-icon nc-simple-remove"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-title centered-text">
+                <h3>Log in</h3>
+                <small class="text-muted">Sign in to your account</small>
+            </div>
+            <form class="form-group py-2" #loginForm="ngForm">
+                <div class="my-1">
+                    <label class="form-label" for="">Email or Username</label>
+                    <input class="form-control" #emailInput="ngModel" ngModel type="text" required pattern=".*@.*\..*|[A-Za-z0-9-\.]+" name="login"
+                        placeholder="Your login">
+                    <app-error-message [text]="'Insert a valid login'" [condition]="emailInput.invalid && emailInput.touched">
+                    </app-error-message>
+                </div>
+                <div class="my-1">
+                    <label class="form-label" for="">Password</label>
+                    <input class="form-control" ngModel type="password" required minlength="5" name="password"
+                        #passwordInput="ngModel" placeholder="your password">
+                    <app-error-message [text]="'A password is at least 5 characters'"
+                        [condition]="passwordInput.invalid && passwordInput.touched"></app-error-message>
+                </div>
+                <button type="submit" [disabled]="loginForm.invalid" class="btn btn-danger btn-block btn-round mt-3"
+                    (click)="login(loginForm)">Sign
+                    in</button>
+            </form>
+            <div class="d-block centered-text">
+                <p>
+                    Don't have an account yet?
+                    <a [routerLink]="[ '/register/signup' ]">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+* *::after *::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    
+}
+
+li{
+    list-style-type: none;
+    margin-top: 10px;
+    width: 70%
+}
+
+li:hover{
+    background-color: #ccc;
+    color: white;
+}
+
+input.ng-invalid.ng-touched{
+    border: red 1px solid;
+}
+
+input.custom-ng-invalid.ng-touched{
+    border: red 1px solid;
+}

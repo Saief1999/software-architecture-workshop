@@ -1,0 +1,78 @@
+<h2 class="text-center my-4">Email Settings</h2>
+<div *ngIf="errorMessage !== ''" class="alert alert-danger my-2 text-center">
+    <div class="container">
+        <i class="nc-bell-55 nc-icon"></i>
+        {{ errorMessage }}
+        <button type="button" class="close" (click)="removeMessage()">
+            <i class="nc-icon nc-simple-remove"></i>
+        </button>
+    </div>
+</div>
+<div *ngIf="successMessage !== ''" class="alert alert-success my-2 text-center">
+    <div class="container">
+        <i class="nc-bell-55 nc-icon"></i>
+        {{ successMessage }}
+        <button type="button" class="close" (click)="removeMessage()">
+            <i class="nc-icon nc-simple-remove"></i>
+        </button>
+    </div>
+</div>
+Your current email is
+<table class="table mt-2">
+    <thead class="thead-dark">
+        <tr>
+            <th>{{user.email}}</th>
+        </tr>
+    </thead>
+</table>
+<div *ngIf="!accountActivated">
+    <div class="alert alert-warning">
+        Your account is not activatetd. <button class="btn btn-sm btn-warning" (click)="resendEmailVerification()">Click here</button> to receive an activation email
+    </div>
+</div>
+<button class="btn btn-primary btn-round" (click)="setEmailFormVisibility()">Click here</button> If you want to change
+it
+<div *ngIf="emailFormVisibility">
+    <form class="mt-5" [formGroup]="newEmailForm" (ngSubmit)="submitNewEmail()">
+        <div class="form-group">
+            <label for="new-email">Your new Email</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="nc-icon nc-email-85"></i></span>
+                </div>
+                <input type="text" class="form-control" id="new-email" formControlName="newEmail">
+            </div>
+            <div *ngIf="newEmailForm.invalid && newEmailForm.touched">
+                <span style="color: red;">Invalid Email</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" class="mr-2" (click)="clickEmailConfirmation()"
+                [checked]="emailInformationConfirmationStatus" id="email-confirmation">
+            <label for="email-confirmation">Are you sure you want to submit these changes</label>
+        </div>
+        <button type="submit" [disabled]="emailInformationDisabled" class="btn btn-success btn-round btn-lg">Change
+            Email</button>
+    </form>
+</div>
+<div *ngIf="emailConfirmationCodeVisibility">
+    <h3>Almost there !</h3>
+    <p>Check your old email for a verification code that you need to provide here</p>
+    <p>Note that if you leave this page that code won't be helpful any more but the old password will be maintained</p>
+    <form class="mt-5" [formGroup]="emailVerificationCodeForm" (ngSubmit)="submitEmailVerification()">
+        <div class="form-group">
+            <label for="">Verification Code</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="nc-icon nc-key-25"></i></span>
+                </div>
+                <input type="number" class="ml-2 form-control-sm" formControlName="verificationCode">
+            </div>
+            <span class="text-danger" *ngIf="emailVerificationCodeForm.invalid && emailVerificationCodeForm.touched">
+                please check your verification code
+            </span>
+        </div>
+        <button type="submit" [disabled]="emailVerificationCodeForm.invalid"
+            class="btn btn-success btn-round btn-lg">Verify</button>
+    </form>
+</div>

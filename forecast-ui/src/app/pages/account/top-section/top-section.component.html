@@ -1,0 +1,14 @@
+<div class="cover-image-container page-header page-header-small">
+    <div class="filter"></div>
+</div>
+<div class="special-row">
+    <img class="profile-picture" [src]="imagePath" alt="Profile Picture">
+    <form [formGroup]="imageUploadForm" (change)="submitProfileImage($event)">
+        <input type="file" class="d-none" id="profile-image" accept="image/*">
+        <label for="profile-image" class="btn btn-outline-default btn-file btn-round">Select image</label>
+    </form>
+    <h3 class="username">{{ user.username }}</h3>
+    <div *ngIf='user.quote'>
+        <blockquote class="blockquote">{{ user.quote }}</blockquote>
+    </div>
+</div>

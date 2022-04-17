@@ -1,0 +1,16 @@
+<div class="wrapper" >
+    <div class="main">
+        <div class="section">
+            <div class="container">
+                <div class="row mb-5 d-flex align-items-center">
+                    <div class="col-10">
+                        <h1>Stores</h1>
+                    </div> 
+                </div>
+                <div>
+                    <app-store-element class="mt-5" *ngFor="let store of stores" [store]="store"></app-store-element>
+                </div>
+                </div>
+            </div>
+    </div>
+</div>

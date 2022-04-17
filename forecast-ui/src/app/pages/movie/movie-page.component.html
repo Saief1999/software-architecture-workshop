@@ -1,0 +1,48 @@
+<div class="wrapper"
+>
+    <div class="page-header page-header-small" [ngStyle]="headerStyle()">
+    </div>
+    <div class="main">
+        <div class="section">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-5">
+                        <img class="img-rounded img-resp" [src]="movieImage() | defaultIfNone">
+                    </div>
+                    <div class="col-7">
+                        <div class="title-header">
+                            <span class="movie-title">
+                                {{movie.title}}
+                            </span>
+                            <span class="movie-release-year">({{movie.release_date.split("-")[0]}})</span>
+                        </div>
+                        <h4 class="sub-title mt-n1 pt-2">
+                            <div>
+                            <span *ngFor="let genre of movie.genres; let last=last">
+                                {{genre.name}}
+                                <span *ngIf="!last"> / </span>
+                            </span>
+                        </div>
+                        </h4>
+                        <div class="mt-2 rating d-flex align-items-center">
+                            <img class="rating-img mr-2" src="assets/img/movies/tmdb.png">
+                            <span class="rating-value">{{movie.vote_average}} / 10 <i class="fa fa-star fa-solid rating-star"></i></span>
+                            </div>
+                        <div class="mt-2">
+                            <div class="plot-title">Plot</div>
+                            <div class="plot-content">{{movie.overview}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col">
+                        <app-calendar [id]="id" [byCinema]="false"></app-calendar>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

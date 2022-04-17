@@ -1,0 +1,204 @@
+<div class="h-75 mx-5">
+    <div class="header">
+        <h1 class="text-center">
+            <span *ngIf="create">
+                Create new Cinema Page
+            </span>
+            <span *ngIf="!create">
+                Update the ' {{ cinema.name }} ' page
+            </span>
+        </h1>
+    </div>
+    <div class="row mt-5 justify-content-between">
+        <div class="col-md-5 mt-5 row justify-content-center">
+            <img [src]="imgURL" class="img-fluid img-thumbnail mb-3">
+            <div class="form-group">
+                <label for="cinema-image" class="btn btn-dark btn-rounded">Select image</label>
+            </div>
+            <input type="file" id="cinema-image" (change)="onFileInput($event)" hidden>
+        </div>
+        <div class="col-md-6">
+            <form [formGroup]="cinemaForm" (ngSubmit)="submit()" (onReset)="resetForm()"> 
+                <div *ngIf="errorMessage !== ''" class="alert alert-danger my-2 text-center">
+                    <div class="container">
+                        <i class="nc-bell-55 nc-icon"></i>
+                        {{ errorMessage }}
+                        <button type="button" class="close" (click)="removeMessage()">
+                            <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="successMessage !== ''" class="alert alert-success my-2 text-center">
+                    <div class="container">
+                        <i class="nc-bell-55 nc-icon"></i>
+                        {{ successMessage }}
+                        <button type="button" class="close" (click)="removeMessage()">
+                            <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" formControlName="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="adress">Adress <span class="text-danger">*</span></label>
+                    <input class= "form-control"type="text" formControlName="address" id="adress">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number <span class="text-danger">*</span></label>
+                    <input class= "form-control"type="number" formControlName="phone" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="opening">Opening time <span class="text-danger">*</span></label>
+                    <input class= "form-control"type="time" formControlName="openingTime" id="opening">
+                </div>
+                <div class="form-group">
+                    <label for="closing">Closing Time <span class="text-danger">*</span></label>
+                    <input class= "form-control"type="time" formControlName="closingTime" id="closing">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description <span class="text-danger">*</span></label>
+                    <textarea class= "form-control"id="description" formControlName="description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="consent" [checked]="termsNotAgree" (click)="setTermsAgreed()" class="form-check-input"
+                            type="checkbox">
+                        I agree with terms & conditions
+                        <span class="form-check-sign">
+                        </span>
+                    </label>
+                </div>
+                <div class="row buttons-row">
+                    <div class="col-md-4 col-sm-4">
+                        <button (click)="resetForm()" class="btn btn-outline-danger btn-block btn-round">
+                            Reset
+                        </button>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <button [disabled]="!termsNotAgree || cinemaForm.invalid" type="submit" class="btn btn-primary btn-block btn-round">
+                            <span *ngIf="create">
+                                Create
+                            </span> 
+                            <span *ngIf="!create">
+                                Update
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div _nghost-jht-c11="" class="ng-star-inserted"><div _ngcontent-jht-c11="" class="wrapper">
+    <div _ngcontent-jht-c11="" class="main">
+        <div _ngcontent-jht-c11="" class="section">
+            <div _ngcontent-jht-c11="" class="container">
+                <h3 _ngcontent-jht-c11="">Add Product</h3>
+                <form _ngcontent-jht-c11="" novalidate="" class="ng-untouched ng-pristine ng-valid">
+                    <div _ngcontent-jht-c11="" class="row"><div _ngcontent-jht-c11="" class="col-md-5 col-sm-5">
+                        <h6 _ngcontent-jht-c11="">Cinema Image</h6>
+                        <div _ngcontent-jht-c11="" _nghost-jht-c10="">
+                            <div _ngcontent-jht-c10="" class="fileinput fileinput-new text-center">
+                                <div _ngcontent-jht-c10="" class="thumbnail img-no-padding">
+                                    <img _ngcontent-jht-c10="" alt="Enter a cinema image" [attr.src]="this.imgURL" width="300" height="300">
+                                </div>
+                                <div _ngcontent-jht-c10="">
+                                    <button _ngcontent-jht-c10="" class="btn btn-outline-default btn-file btn-round ng-star-inserted mt-2"
+                                            (click)="fileInput.click()">
+                                        Select image
+                                        <input name="imgFile" [(ngModel)]="this.imgFile"  #fileInput type="file" (change)="onFileInput($event)"
+                                               style="display:none;"  accept="image/*">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div _ngcontent-jht-c11="" class="col-md-7 col-sm-7">
+                            <div _ngcontent-jht-c11="" class="form-group"><h6 _ngcontent-jht-c11="">
+                                Name
+                                <span _ngcontent-jht-c11="" class="icon-danger">
+                                    *
+                                </span>
+                            </h6>
+                                <input name="name" [(ngModel)]="cinema.name" _ngcontent-jht-c11="" class="form-control border-input" placeholder="enter the cinema name here..." type="text">
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-group">
+                                <h6 _ngcontent-jht-c11="">
+                                    Address
+                                    <span _ngcontent-jht-c11="" class="icon-danger">
+                                        *
+                                    </span>
+                                </h6>
+                                <input name="address" [(ngModel)]="cinema.address" _ngcontent-jht-c11="" class="form-control border-input" placeholder="enter the address of the cinema here..." type="text">
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-group">
+                                <h6 _ngcontent-jht-c11="">
+                                    Phone
+                                    <span _ngcontent-jht-c11="" class="icon-danger">
+                                        *
+                                    </span>
+                                </h6>
+                                <input name="phone" [(ngModel)]="cinema.phone" _ngcontent-jht-c11="" class="form-control border-input" placeholder="enter the phone numbers here..." type="number">
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-group">
+                                <h6 _ngcontent-jht-c11="">
+                                    Opening Time
+                                    <span _ngcontent-jht-c11="" class="icon-danger">
+                                        *
+                                    </span>
+                                </h6>
+                                <input name="openingTime" [(ngModel)]="cinema.openingTime" _ngcontent-jht-c11="" class="form-control border-input" type="time">
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-group">
+                                <h6 _ngcontent-jht-c11="">
+                                    Closing Time
+                                    <span _ngcontent-jht-c11="" class="icon-danger">
+                                        *
+                                    </span>
+                                </h6>
+                                <input name="closingTime" [(ngModel)]="cinema.closingTime" _ngcontent-jht-c11="" class="form-control border-input" type="time">
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-group"><h6 _ngcontent-jht-c11="">
+                                Description
+                            </h6>
+                                <textarea name="description" [(ngModel)]="cinema.description" _ngcontent-jht-c11="" class="form-control textarea-limited" maxlength="150" placeholder="This is a textarea limited to 150 characters." rows="13">
+                                </textarea><h5 _ngcontent-jht-c11="">
+                                    <small _ngcontent-jht-c11="">
+                                        <span _ngcontent-jht-c11="" class="pull-right" id="textarea-limited-message">
+                                            {{150-cinema.description.length}} characters left
+                                        </span>
+                                    </small>
+                                </h5>
+                            </div>
+                            <div _ngcontent-jht-c11="" class="form-check">
+                                <label _ngcontent-jht-c11="" class="form-check-label">
+                                    <input name="consent" [(ngModel)]="this.termsNotAgree" _ngcontent-jht-c11="" class="form-check-input" type="checkbox" value="">
+                                    I agree with terms & conditions
+                                    <span _ngcontent-jht-c11="" class="form-check-sign">
+                                    </span>
+                                </label>
+                            </div>
+                            <div _ngcontent-jht-c11="" class="row buttons-row">
+                                <div _ngcontent-jht-c11="" class="col-md-4 col-sm-4">
+                                    <button _ngcontent-jht-c11="" class="btn btn-outline-danger btn-block btn-round" (click)="this.reset()">
+                                        Reset
+                                    </button>
+                                </div>
+                                <div _ngcontent-jht-c11="" class="col-md-4 col-sm-4">
+                                    <button [disabled]="!termsNotAgree" _ngcontent-jht-c11="" class="btn btn-primary btn-block btn-round" (click)="this.onPublish()">
+                                        Create
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
