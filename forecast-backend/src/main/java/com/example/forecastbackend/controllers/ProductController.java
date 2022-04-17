@@ -24,6 +24,7 @@ public class ProductController {
     {
         return productRepository.findAll();
     }
+
     @PostMapping("")
     public Product createProduct(@RequestBody Product product) {
         Product newProduct = productRepository.save(product);
