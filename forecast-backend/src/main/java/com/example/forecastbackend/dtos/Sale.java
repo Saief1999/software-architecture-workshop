@@ -4,8 +4,14 @@ import java.util.Date;
 
 public class Sale {
     private String productId;
+    private String storeId;
     private int quantity;
     private Date date;
+
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -29,5 +35,9 @@ public class Sale {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getStoreId() {
+        return storeId;
     }
 }

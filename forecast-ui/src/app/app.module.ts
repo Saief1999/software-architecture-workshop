@@ -52,8 +52,10 @@ import { StoreElementComponent } from "./pages/stores/store-element/store-elemen
 
 import { ProductsPageComponent } from "./pages/products/products-page.component";
 import { ProductElementComponent } from "./pages/products/product-element/product-element.component";
-import { ForecastPageComponent } from "./pages/forecast/forecast-page.component";
 
+import { ForecastPageComponent } from "./pages/forecast/forecast-page.component";
+import { ForecastChartComponent } from "./pages/forecast/chart/chart.component";
+import { NgApexchartsModule } from "ng-apexcharts";
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -94,7 +96,8 @@ FullCalendarModule.registerPlugins([
     StoreElementComponent,
     ProductsPageComponent,
     ProductElementComponent,
-    ForecastPageComponent
+    ForecastPageComponent,
+    ForecastChartComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +112,8 @@ FullCalendarModule.registerPlugins([
     ReactiveFormsModule,
     Ng2PageScrollModule,
     InfiniteScrollModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgApexchartsModule
   ],
   providers: [
     AuthentificationInterceptorProvider,

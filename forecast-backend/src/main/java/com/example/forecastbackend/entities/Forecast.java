@@ -18,6 +18,12 @@ public class Forecast {
 
     private String productId;
 
+    private String storeId;
+
+
+    public String getStoreId() {
+        return storeId;
+    }
     public int getNbSales() {
         return nbSales;
     }
@@ -48,5 +54,9 @@ public class Forecast {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 }

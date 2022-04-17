@@ -46,7 +46,8 @@ public class ProductController {
         return new ResponseEntity<String>("Product deleted", HttpStatus.OK);
     }
 
-    @ExceptionHandler(BadRequestException.class)
+
+        @ExceptionHandler(BadRequestException.class)
     void handleBadRequests(BadRequestException bre, HttpServletResponse response) throws IOException {
 
         int respCode = (bre.errCode == BadRequestException.ID_NOT_FOUND) ?

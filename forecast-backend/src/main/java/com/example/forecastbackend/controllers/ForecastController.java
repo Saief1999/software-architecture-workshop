@@ -37,4 +37,17 @@ public class ForecastController {
         return new ResponseEntity<String>("New Data Processed", HttpStatus.OK);
     }
 
+    //    {
+    //        predicted: [
+    //        {
+    //            Forecast1,
+    //                    Forecast2...
+    //        }
+    //                ],
+    //        actualData: [
+    //        Forecast1...,
+    //        Forecast...
+    //                ]
+    //    }
+
 }
