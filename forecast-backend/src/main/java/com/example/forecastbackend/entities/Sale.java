@@ -1,13 +1,25 @@
-package com.example.forecastbackend.dtos;
+package com.example.forecastbackend.entities;
+
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
+
 public class Sale {
+    @Id
+    private String id;
     private String productId;
     private String storeId;
     private int quantity;
     private Date date;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 
     public void setStoreId(String storeId) {
         this.storeId = storeId;

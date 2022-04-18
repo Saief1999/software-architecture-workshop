@@ -1,29 +1,45 @@
 package com.example.forecastbackend.controllers;
 
 import com.example.forecastbackend.dtos.ProcessData;
+import com.example.forecastbackend.dtos.SaleDetails;
+import com.example.forecastbackend.dtos.SaleVisualisationResult;
+import com.example.forecastbackend.entities.Forecast;
 import com.example.forecastbackend.entities.Product;
+import com.example.forecastbackend.entities.Sale;
+import com.example.forecastbackend.entities.Store;
+import com.example.forecastbackend.exceptions.BadRequestException;
+import com.example.forecastbackend.ml.DummyForecastPredictor;
+import com.example.forecastbackend.ml.ForecastPredictor;
 import com.example.forecastbackend.respositories.ProductRepository;
+import com.example.forecastbackend.respositories.SalesRepository;
 import com.example.forecastbackend.respositories.StoreRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 @RequestMapping("forecast")
 
 public class ForecastController {
 
+    private ForecastPredictor predictor = new DummyForecastPredictor(5);
     private ProductRepository productRepository;
     private StoreRepository storeRepository;
 
-    public ForecastController(ProductRepository productRepository, StoreRepository storeRepository) {
+    private SalesRepository salesRepository;
+
+    public ForecastController(ProductRepository productRepository, StoreRepository storeRepository,SalesRepository salesRepository) {
         this.storeRepository = storeRepository ;
         this.productRepository = productRepository;
+        this.salesRepository=salesRepository;
     }
 
     @PostMapping("process")
@@ -37,6 +53,41 @@ public class ForecastController {
         return new ResponseEntity<String>("New Data Processed", HttpStatus.OK);
     }
 
+    @GetMapping("process")
+    public ResponseEntity<SaleVisualisationResult> forecast() throws Exception
+    {
+        var products = this.productRepository.findAll();
+        var stores = this.storeRepository.findAll();
+        var sales=this.salesRepository.findAll();
+        Map<String, Product> productMap = new HashMap<>();
+        Map<String, Store> storeMap = new HashMap<>();
+        Map<String, SaleDetails> saleMap = new HashMap<>();
+        for (Product product : products)
+            productMap.put(product.getName(), product);
+        for(Store store: stores)
+            storeMap.put(store.getName(), store);
+        for(Sale sale: sales)
+        {
+            SaleDetails saleDetails=new SaleDetails();
+            saleDetails.setId(sale.getId());
+            saleDetails.setQuantity(sale.getQuantity());
+            saleDetails.setStoreId(sale.getStoreId());
+            saleDetails.setDate(sale.getDate());
+            saleDetails.setProductId(sale.getProductId());
+            saleDetails.setPrice(productMap.get(sale.getProductId()).getPrice());
+            saleMap.put(sale.getId(),saleDetails);
+        }
+        Date date=new Date();
+        return new ResponseEntity<SaleVisualisationResult>(new SaleVisualisationResult(predictor.forecastSales("1","1", date,50,12),
+                predictor.forecastSales("1","1", date,50,12)), HttpStatus.OK);
+    }
+    @ExceptionHandler(BadRequestException.class)
+    void handleBadRequests(BadRequestException bre, HttpServletResponse response) throws IOException {
+
+        int respCode = (bre.errCode == BadRequestException.ID_NOT_FOUND) ?
+                HttpStatus.NOT_FOUND.value() : HttpStatus.BAD_REQUEST.value() ;
+        response.sendError(respCode, bre.errCode + ":" + bre.getMessage());
+    }
     //    {
     //        predicted: [
     //        {

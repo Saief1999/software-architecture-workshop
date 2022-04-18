@@ -1,6 +1,7 @@
 package com.example.forecastbackend.dtos;
 
 import com.example.forecastbackend.entities.Product;
+import com.example.forecastbackend.entities.Sale;
 import com.example.forecastbackend.entities.Store;
 
 import java.util.List;

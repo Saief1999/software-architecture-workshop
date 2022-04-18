@@ -1,9 +1,9 @@
 package com.example.forecastbackend.controllers;
 
-import com.example.forecastbackend.entities.Product;
+import com.example.forecastbackend.entities.Sale;
 import com.example.forecastbackend.entities.Store;
 import com.example.forecastbackend.exceptions.BadRequestException;
-import com.example.forecastbackend.respositories.ProductRepository;
+import com.example.forecastbackend.respositories.SalesRepository;
 import com.example.forecastbackend.respositories.StoreRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,37 +14,38 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController()
-@RequestMapping("stores")
-public class StoreController {
+@RequestMapping("sales")
+public class SalesController
+{
 
-    private StoreRepository storeRepository;
-    public StoreController(StoreRepository storeRepository) {
-        this.storeRepository = storeRepository;
+    private final SalesRepository salesRepository;
+    public SalesController(SalesRepository salesRepository) {
+        this.salesRepository = salesRepository;
     }
     @GetMapping("")
-    public List<Store> listStores()
+    public List<Sale> listSales()
     {
-        return storeRepository.findAll();
+        return salesRepository.findAll();
     }
     @PostMapping("")
-    public Store createStore(@RequestBody Store store) {
-        Store newStore = storeRepository.save(store);
-        return newStore;
+    public Sale createStore(@RequestBody Sale sale) {
+        Sale newSale = salesRepository.save(sale);
+        return newSale;
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> removeStore(@PathVariable("id") String id) {
 
-        if(!storeRepository.existsById(id))
-            throw new BadRequestException(BadRequestException.ID_NOT_FOUND,"Store Not found with id " + id);
+        if(!salesRepository.existsById(id))
+            throw new BadRequestException(BadRequestException.ID_NOT_FOUND,"Sale Not found with id " + id);
 
-        storeRepository.deleteById(id);
+        salesRepository.deleteById(id);
 
-        //Store deletedStore =  new Store();
-        //deletedStore.setId(id);
+        //Sale deletedSale =  new Sale();
+        //deletedSale.setId(id);
 
-        return new ResponseEntity<String>("Store deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Sale deleted", HttpStatus.OK);
     }
 
     @ExceptionHandler(BadRequestException.class)
