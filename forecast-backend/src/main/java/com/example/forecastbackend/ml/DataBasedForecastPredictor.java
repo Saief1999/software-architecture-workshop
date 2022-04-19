@@ -11,16 +11,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class DataBasedForeCastPredictor  implements ForecastPredictor
+public class DataBasedForecastPredictor implements ForecastPredictor
 {
-    private Classifier classifier;
-    private Transformer transformer = new Transformer();
-    private DateReducer dateReducer = new DateReducer();
-    public DataBasedForeCastPredictor(Classifier classifier) {
+    protected Classifier classifier;
+    protected Transformer transformer = new Transformer();
+    protected DateReducer dateReducer = new DateReducer();
+    public DataBasedForecastPredictor(Classifier classifier) {
         this.classifier = classifier;
     }
 
-    public DataBasedForeCastPredictor train(Map<String, SaleDetails> mapper) throws Exception {
+    public DataBasedForecastPredictor train(Map<String, SaleDetails> mapper) throws Exception {
         var dataset=transformer.transform(dateReducer.reduce(mapper));
         classifier.buildClassifier(dataset);
         return this;

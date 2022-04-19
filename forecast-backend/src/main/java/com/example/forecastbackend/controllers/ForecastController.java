@@ -3,13 +3,13 @@ package com.example.forecastbackend.controllers;
 import com.example.forecastbackend.dtos.ProcessData;
 import com.example.forecastbackend.dtos.SaleDetails;
 import com.example.forecastbackend.dtos.SaleVisualisationResult;
-import com.example.forecastbackend.entities.Forecast;
 import com.example.forecastbackend.entities.Product;
 import com.example.forecastbackend.entities.Sale;
 import com.example.forecastbackend.entities.Store;
 import com.example.forecastbackend.exceptions.BadRequestException;
 import com.example.forecastbackend.ml.DummyForecastPredictor;
 import com.example.forecastbackend.ml.ForecastPredictor;
+import com.example.forecastbackend.ml.StochasticForecastPredictor;
 import com.example.forecastbackend.respositories.ProductRepository;
 import com.example.forecastbackend.respositories.SalesRepository;
 import com.example.forecastbackend.respositories.StoreRepository;
@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -30,32 +28,16 @@ import java.util.Map;
 
 public class ForecastController {
 
-    private ForecastPredictor predictor = new DummyForecastPredictor(5);
+    private ForecastPredictor predictor;
     private ProductRepository productRepository;
     private StoreRepository storeRepository;
 
     private SalesRepository salesRepository;
 
-    public ForecastController(ProductRepository productRepository, StoreRepository storeRepository,SalesRepository salesRepository) {
+    public ForecastController(ProductRepository productRepository, StoreRepository storeRepository,SalesRepository salesRepository)throws Exception {
         this.storeRepository = storeRepository ;
         this.productRepository = productRepository;
         this.salesRepository=salesRepository;
-    }
-
-    @PostMapping("process")
-    public ResponseEntity<String> processSales(@RequestBody ProcessData processdata) {
-
-
-        this.productRepository.saveAll(processdata.getProducts());
-        this.storeRepository.saveAll(processdata.getStores());
-        System.out.println(processdata.getSales());
-
-        return new ResponseEntity<String>("New Data Processed", HttpStatus.OK);
-    }
-
-    @GetMapping("process")
-    public ResponseEntity<SaleVisualisationResult> forecast() throws Exception
-    {
         var products = this.productRepository.findAll();
         var stores = this.storeRepository.findAll();
         var sales=this.salesRepository.findAll();
@@ -77,6 +59,32 @@ public class ForecastController {
             saleDetails.setPrice(productMap.get(sale.getProductId()).getPrice());
             saleMap.put(sale.getId(),saleDetails);
         }
+        try {
+            predictor=new StochasticForecastPredictor();
+            predictor.train(saleMap);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Unable to build model, using dummy model");
+            predictor=new DummyForecastPredictor(5);
+            predictor.train(saleMap);
+        }
+    }
+
+    @PostMapping("process")
+    public ResponseEntity<String> processSales(@RequestBody ProcessData processdata) {
+
+
+        this.productRepository.saveAll(processdata.getProducts());
+        this.storeRepository.saveAll(processdata.getStores());
+        System.out.println(processdata.getSales());
+
+        return new ResponseEntity<String>("New Data Processed", HttpStatus.OK);
+    }
+
+    @GetMapping("process")
+    public ResponseEntity<SaleVisualisationResult> forecast() throws Exception
+    {
+
         Date date=new Date();
         return new ResponseEntity<SaleVisualisationResult>(new SaleVisualisationResult(predictor.forecastSales("1","1", date,50,12),
                 predictor.forecastSales("1","1", date,50,12)), HttpStatus.OK);

@@ -1,10 +1,8 @@
 package com.example.forecastbackend.controllers;
 
 import com.example.forecastbackend.entities.Sale;
-import com.example.forecastbackend.entities.Store;
 import com.example.forecastbackend.exceptions.BadRequestException;
 import com.example.forecastbackend.respositories.SalesRepository;
-import com.example.forecastbackend.respositories.StoreRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

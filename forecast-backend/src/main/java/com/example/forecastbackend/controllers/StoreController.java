@@ -1,9 +1,7 @@
 package com.example.forecastbackend.controllers;
 
-import com.example.forecastbackend.entities.Product;
 import com.example.forecastbackend.entities.Store;
 import com.example.forecastbackend.exceptions.BadRequestException;
-import com.example.forecastbackend.respositories.ProductRepository;
 import com.example.forecastbackend.respositories.StoreRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
