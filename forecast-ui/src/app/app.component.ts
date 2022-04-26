@@ -12,9 +12,6 @@ import { filter } from "rxjs/operators";
 import { DOCUMENT } from "@angular/common";
 import { Location } from "@angular/common";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
-import { genres } from "./utilities/store";
-import { GenresService } from "./services/genres.service";
-import { DbGenre } from "./dto/genres/genre";
 import {
   isUriInArray,
   noFooterPages,
@@ -36,10 +33,8 @@ export class AppComponent implements OnInit {
     @Inject(DOCUMENT) private document: any,
     private element: ElementRef,
     public location: Location,
-    private genresService: GenresService
   ) {}
   ngOnInit() {
-    this.listGenres(); // get the genres list from the backend
     var navbar: HTMLElement =
       this.element.nativeElement.children[0].children[0];
     this._router = this.router.events
@@ -85,11 +80,5 @@ export class AppComponent implements OnInit {
   removeFooter() {
     let pageUri = this.location.prepareExternalUrl(this.location.path());
     return isUriInArray(noFooterPages, pageUri);
-  }
-
-  listGenres() {
-    this.genresService.listGenres().subscribe((genresResult: DbGenre[]) => {
-      genres.next(genresResult);
-    });
   }
 }

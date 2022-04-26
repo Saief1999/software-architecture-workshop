@@ -8,12 +8,75 @@
                         <h1> Forecast </h1>
                     </div> 
                 </div>
-                <div class="row"
-                >
-                <app-forecast-chart></app-forecast-chart>
+
+                <div class="row">
+                    <div class="col-12">
+                    <form [formGroup]="forecastForm" (ngSubmit)="submit()" (onReset)="resetForm()"> 
+                        <div class="row">
+                            <span class="col">
+                                <!-- <angular2-multiselect 
+                                [data]="products" 
+                                [(ngModel)]="product" 
+                                [settings]="productSelectorSettings"
+                                ></angular2-multiselect> -->
+
+                                <select class="custom-select" aria-label="Default select example" formControlName="product">
+                                    <!-- <option selected>Products</option> -->
+
+                                    <option *ngFor="let product of products" [value]="product.id">
+                                        {{product.name}}
+                                    </option>
+                                </select>
+
+                            </span>
+
+
+
+                            <span class="col">
+                                <!-- <angular2-multiselect 
+                                [data]="stores" 
+                                [(ngModel)]="store" 
+                                [settings]="storeSelectorSettings"
+                                ></angular2-multiselect> -->
+                                <select class="custom-select" aria-label="Stores" formControlName="store">
+                                    <!-- <option selected>Products</option> -->
+                                    <option *ngFor="let store of stores" [value]="store.id">
+                                        {{store.name}}
+                                    </option>
+                                </select>
+                            </span>
+
+                            <!-- <div class="col form-group">
+                                <label for="product">Product <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="product" id="product">
+                            </div>
+                            <div class="col form-group">
+                                <label for="store">Store <span class="text-danger">*</span></label>
+                                <input class= "form-control"type="text" formControlName="store" id="store">
+                            </div> -->
+                        </div>
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="date">Date <span class="text-danger">*</span></label>
+                                <input class= "form-control"type="date" formControlName="date" id="date">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2 mx-0">
+                                <button [disabled]="forecastForm.invalid" type="submit" class="btn btn-primary btn-block btn-round">
+                                    Find Forecast
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <app-forecast-chart></app-forecast-chart>
                     <!-- <app-product-element class="col-md-3 col-sm-6 col-xs-12" *ngFor="let product of products" [product]="product"></app-product-element> -->
                 </div>
-                </div>
             </div>
+        </div>
     </div>
 </div>
