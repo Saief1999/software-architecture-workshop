@@ -9,6 +9,7 @@ import com.example.forecastbackend.entities.Store;
 import com.example.forecastbackend.exceptions.BadRequestException;
 import com.example.forecastbackend.ml.DummyForecastPredictor;
 import com.example.forecastbackend.ml.ForecastPredictor;
+import com.example.forecastbackend.ml.M5PForecastPredictor;
 import com.example.forecastbackend.ml.StochasticForecastPredictor;
 import com.example.forecastbackend.respositories.ProductRepository;
 import com.example.forecastbackend.respositories.SalesRepository;
@@ -22,6 +23,14 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+
+class VisualisationRequest
+{
+    public String storeId;
+    public String productId;
+    public Date date;
+}
 
 @RestController()
 @RequestMapping("forecast")
@@ -45,9 +54,9 @@ public class ForecastController {
         Map<String, Store> storeMap = new HashMap<>();
         Map<String, SaleDetails> saleMap = new HashMap<>();
         for (Product product : products)
-            productMap.put(product.getName(), product);
+            productMap.put(product.getId(), product);
         for(Store store: stores)
-            storeMap.put(store.getName(), store);
+            storeMap.put(store.getId(), store);
         for(Sale sale: sales)
         {
             SaleDetails saleDetails=new SaleDetails();
@@ -60,7 +69,7 @@ public class ForecastController {
             saleMap.put(sale.getId(),saleDetails);
         }
         try {
-            predictor=new StochasticForecastPredictor();
+            predictor=new M5PForecastPredictor();
             predictor.train(saleMap);
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,13 +90,13 @@ public class ForecastController {
         return new ResponseEntity<String>("New Data Processed", HttpStatus.OK);
     }
 
-    @GetMapping("process")
-    public ResponseEntity<SaleVisualisationResult> forecast() throws Exception
+    @PostMapping("")
+    public ResponseEntity<SaleVisualisationResult> forecast(@RequestBody VisualisationRequest request) throws Exception
     {
 
-        Date date=new Date();
-        return new ResponseEntity<SaleVisualisationResult>(new SaleVisualisationResult(predictor.forecastSales("1","1", date,50,12),
-                predictor.forecastSales("1","1", date,50,12)), HttpStatus.OK);
+        return new ResponseEntity<SaleVisualisationResult>(new SaleVisualisationResult(
+                predictor.forecastSales(request.productId,request.storeId,request.date,50,12),
+                predictor.forecastSales(request.productId,request.storeId,request.date,50,12)), HttpStatus.OK);
     }
     @ExceptionHandler(BadRequestException.class)
     void handleBadRequests(BadRequestException bre, HttpServletResponse response) throws IOException {

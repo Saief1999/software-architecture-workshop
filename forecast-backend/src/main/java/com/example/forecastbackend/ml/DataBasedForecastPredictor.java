@@ -3,6 +3,8 @@ package com.example.forecastbackend.ml;
 import com.example.forecastbackend.dtos.SaleDetails;
 import com.example.forecastbackend.entities.Forecast;
 import weka.classifiers.Classifier;
+import weka.core.Attribute;
+import weka.core.Instances;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -27,13 +29,15 @@ public class DataBasedForecastPredictor implements ForecastPredictor
     }
 
     public List<Forecast> forecastSales(String productId, String storeId, Date date,double price, int months) throws Exception {
-        List<Forecast> predictions = new ArrayList<>(months);
+        ArrayList<Forecast> predictions = new ArrayList<>(months);
+        Instances dataset= new Instances("prediction", (ArrayList<Attribute>) transformer.getAttributes(),2000);
+        dataset.setClassIndex(transformer.getClassIndex());
         for(int i=0;i<months;i++)
         {
             Forecast forecast = new Forecast();
             forecast.setProductId(productId);
             forecast.setStoreId(storeId);
-            LocalDate futureDate = forecast.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(i+1);
+            LocalDate futureDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().plusMonths(i+1);
             var newDate=Date.from(futureDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             forecast.setDate(newDate);
             var saleDetails= new SaleDetails();
@@ -41,7 +45,10 @@ public class DataBasedForecastPredictor implements ForecastPredictor
             saleDetails.setStoreId(storeId);
             saleDetails.setProductId(productId);
             saleDetails.setDate(newDate);
-            forecast.setNbSales((int)Math.round(classifier.classifyInstance(transformer.transform(saleDetails))));
+            var instance=transformer.transform(saleDetails);
+            dataset.add(instance);
+            instance.setDataset(dataset);
+            forecast.setNbSales((int)Math.round(classifier.classifyInstance(instance)));
             predictions.add(forecast);
         }
         return predictions;
