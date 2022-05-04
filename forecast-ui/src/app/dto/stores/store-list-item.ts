@@ -1,5 +1,5 @@
 export class StoreListItem {
-    _id: string;
+    id: string;
     name: string;
     description: string;
     // imageUrl: string;

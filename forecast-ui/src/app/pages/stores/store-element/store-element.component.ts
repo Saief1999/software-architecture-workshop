@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Router } from "@angular/router";
 import { StoreListItem } from "app/dto/stores/store-list-item";
-import { AuthenticationService } from "app/services/authentication.service";
 
 @Component({
   selector: "app-store-element",
@@ -11,7 +10,6 @@ import { AuthenticationService } from "app/services/authentication.service";
 export class StoreElementComponent implements OnInit {
   constructor(
     private router: Router,
-    private authService: AuthenticationService
   ) {}
 
   @Input() store: StoreListItem;

@@ -14,16 +14,5 @@ export class ProductElementComponent implements OnInit {
   @Input() product: Product;
 
   ngOnInit(): void {}
-  // movieImage(): string {
-  //   if (!this.movie.poster_path) return null;
-  //   return TMDB_IMG_URI + this.movie.poster_path;
-  // }
 
-
-  // genreName(id: number) {
-  //   const name: String =
-  //     genres.value.find((genre) => genre.id === id)?.name || "";
-  //   if (name === "Science Fiction") return "Sci-Fi";
-  //   return name;
-  // }
 }

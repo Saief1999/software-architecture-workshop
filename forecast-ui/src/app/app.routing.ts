@@ -11,17 +11,12 @@ import { NucleoiconsComponent } from "./components/nucleoicons/nucleoicons.compo
 import { RegistrationPageComponent } from "./pages/auth/registration-page.component";
 import { LoginCardComponent } from "./pages/auth/login-card/login-card.component";
 import { SignupCardComponent } from "./pages/auth/signup-card/signup-card.component";
-import { CinemasPageComponent } from "./pages/cinemas/cinemas-page.component";
 import { NotFoundPageComponent } from "./not-found/not-found-page.component";
 import { ConfirmEmailComponent } from "./pages/auth/confirm-email/confirm-email.component";
 import { AccountPageComponent } from "./pages/account/account-page.component";
-import { MoviesPageComponent } from "./pages/movies/movies-page.component";
-import { MoviePageComponent } from "./pages/movie/movie-page.component";
 import { UserRoleGuard } from "./guards/user-role.guard";
 import { UnauthenticatedGuard } from "./guards/unauthenticated.guard";
 // import { AuthenticatedGuad } from './guards/authenticated.guard';
-import { CinemasCreateComponent } from "./pages/cinemas/cinema-create/cinemas-create.component";
-import { SingleCinemaComponent } from "./pages/cinemas/single-cinema/single-cinema.component";
 import { AuthenticatedGuad } from "./guards/authenticated.guard";
 import { StoresPageComponent } from "./pages/stores/stores-page.component";
 import { ProductsPageComponent } from "./pages/products/products-page.component";
@@ -57,27 +52,6 @@ const routes: Routes = [
     ],
     canActivate: [UnauthenticatedGuard]
   },
-  // { path: "movies", component: MoviesPageComponent },
-  // { path: "movies/:id", component: MoviePageComponent },
-  // {
-  //   path: "confirm-email",
-  //   component: ConfirmEmailComponent,
-  //   canActivate: [UserRoleGuard]
-  // },
-  // {
-  //   path: "account",
-  //   component: AccountPageComponent,
-  //   canActivate: [AuthenticatedGuad]
-  // },
-  // {
-  //   path: "cinemas",
-  //   component: CinemasPageComponent /*canActivate: [AuthenticatedGuard] */
-  // },
-  // { path: "cinemas/create", component: CinemasCreateComponent },
-  // // { path: 'cinemas/update', component: CinemasCreateComponent },
-  // { path: "cinemas/update/:id", component: CinemasCreateComponent },
-  // { path: "cinemas/:id", component: SingleCinemaComponent },
-
   { path: "stores", component: StoresPageComponent },
   { path: "products", component: ProductsPageComponent },
   { path: "forecast", component: ForecastPageComponent },

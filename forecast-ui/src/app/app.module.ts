@@ -17,8 +17,6 @@ import { LoginCardComponent } from "./pages/auth/login-card/login-card.component
 import { SignupCardComponent } from "./pages/auth/signup-card/signup-card.component";
 import { ErrorMessageComponent } from "./pages/auth/error-message/error-message.component";
 import { HttpClientModule } from "@angular/common/http";
-import { CinemasPageComponent } from "./pages/cinemas/cinemas-page.component";
-import { CinemaElementComponent } from "./pages/cinemas/cinema-element/cinema-element.component";
 import { ConfirmEmailComponent } from "./pages/auth/confirm-email/confirm-email.component";
 import { AccountPageComponent } from "./pages/account/account-page.component";
 import { TopSectionComponent } from "./pages/account/top-section/top-section.component";
@@ -28,13 +26,8 @@ import { GeneralInformationSectionComponent } from "./pages/account/general-info
 import { EmailSectionComponent } from "./pages/account/email-section/email-section.component";
 import { PasswordSectionComponent } from "./pages/account/password-section/password-section.component";
 import { HttpErrorInterceptorProvider } from "./interceptors/http-error.interceptor";
-import { MovieElementComponent } from "./pages/movies/movie-element/movie-element.component";
-import { MoviesPageComponent } from "./pages/movies/movies-page.component";
-import { MoviePageComponent } from "./pages/movie/movie-page.component";
 
 import { AngularMultiSelectModule } from "angular2-multiselect-dropdown";
-import { CinemasCreateComponent } from "./pages/cinemas/cinema-create/cinemas-create.component";
-import { CinemaImgComponent } from "./pages/cinemas/cinema-img/cinema-img.component";
 import { defaultImagePipe } from "./pipes/default-image.pipe";
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { FullCalendarModule } from "@fullcalendar/angular";
@@ -43,9 +36,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import BootstrapThemePlugin from "@fullcalendar/bootstrap";
-import { CalendarComponent } from "./pages/cinemas/calendar/calendar.component";
 import { LandingComponent } from "./pages/landing/landing.component";
-import { SingleCinemaComponent } from "./pages/cinemas/single-cinema/single-cinema.component";
 
 import { StoresPageComponent } from "./pages/stores/stores-page.component";
 import { StoreElementComponent } from "./pages/stores/store-element/store-element.component";
@@ -56,6 +47,7 @@ import { ProductElementComponent } from "./pages/products/product-element/produc
 import { ForecastPageComponent } from "./pages/forecast/forecast-page.component";
 import { ForecastChartComponent } from "./pages/forecast/chart/chart.component";
 import { NgApexchartsModule } from "ng-apexcharts";
+
 FullCalendarModule.registerPlugins([
   // register FullCalendar plugins
   dayGridPlugin,
@@ -72,14 +64,6 @@ FullCalendarModule.registerPlugins([
     RegistrationPageComponent,
     LoginCardComponent,
     SignupCardComponent,
-    CinemasPageComponent,
-    CinemaImgComponent,
-    CinemasCreateComponent,
-    CinemaElementComponent,
-    SingleCinemaComponent,
-    MoviesPageComponent,
-    MovieElementComponent,
-    MoviePageComponent,
     ErrorMessageComponent,
     ConfirmEmailComponent,
     AccountPageComponent,
@@ -89,7 +73,6 @@ FullCalendarModule.registerPlugins([
     EmailSectionComponent,
     PasswordSectionComponent,
     defaultImagePipe,
-    CalendarComponent,
     LandingComponent,
 
     StoresPageComponent,

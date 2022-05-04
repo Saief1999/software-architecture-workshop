@@ -1,4 +1,4 @@
-export const BACKEND_URL = "http://localhost:3000";
+export const BACKEND_URL = "http://localhost:8080";
 export const ACCOUNTPROFILELINK = `${BACKEND_URL}/accounts/me`;
 export const PASSWORDUPDATELINK = `${BACKEND_URL}/accounts/me/password`;
 export const PASSWORDVERIFICATIONLINK = `${BACKEND_URL}/accounts/me/password/confirm`;

@@ -1,19 +1,19 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Genre } from "app/dto/genres/genre";
+import { StoreListItem } from "app/dto/stores/store-list-item";
 import { Observable } from "rxjs";
 import { BACKEND_URL } from "../../constants";
 
 @Injectable({
   providedIn: "root"
 })
-export class GenresService {
-  private genresUri;
+export class StoresService {
+  private storesUri;
   constructor(private http: HttpClient) {
-    this.genresUri = `${BACKEND_URL}/genres`;
+    this.storesUri = `${BACKEND_URL}/stores`;
   }
 
-  listGenres(): Observable<Genre[]> {
-    return this.http.get<Genre[]>(`${this.genresUri}/movies`);
+  listStores(): Observable<StoreListItem[]> {
+    return this.http.get<StoreListItem[]>(this.storesUri);
   }
 }
