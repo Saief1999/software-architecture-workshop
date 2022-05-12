@@ -6,16 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="forecast-backend" />
+        <module name="spark-import" />
+        <module name="import-microservice" />
+        <module name="import-consumer-microservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="data-source" target="11" />
       <module name="forecast-backend" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="data-source" options="-parameters" />
       <module name="forecast-backend" options="-parameters" />
+      <module name="import-consumer-microservice" options="-parameters" />
+      <module name="import-microservice" options="-parameters" />
     </option>
   </component>
 </project>

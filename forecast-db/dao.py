@@ -24,3 +24,13 @@ class Sale(Document):
     productId=ObjectIdField()
     quantity=IntField(min_value=0)
     date=DateTimeField()
+    price=FloatField(min_value=0) # added
+    productname=StringField(max_length=64) 
+    storename=StringField(max_length=64) 
+
+
+    def __repr__(self):
+        return f"{self.productId},{self.productname},{self.price},{self.storeId},{self.storename},{self.quantity},{self.date}"
+    
+    def __str__(self):
+        return self.__repr__()

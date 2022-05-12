@@ -34,7 +34,7 @@ public class Transformer
         for (var id : mapper.keySet())
         {
             Instance instance=new DenseInstance(attributes.size());
-            if(!storeEncoder.containsKey(mapper.get(id).getStoreId()))
+            if(!storeEncoder.containsKey(mapper.get(id).<w>getStoreId()))
             {
                 storeEncoder.put(mapper.get(id).getStoreId(),storeEncoder.size());
                 storeInverseEncoder.add(mapper.get(id).getStoreId());
